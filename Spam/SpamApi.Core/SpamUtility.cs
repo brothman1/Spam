@@ -12,7 +12,7 @@ namespace SpamApi.Core
 {
     public static class SpamUtility
     {
-        private static readonly string developmentConnectionString = @"Data Source=DESKTOP-977JTTD\ROTH1;Initial Catalog=SpamDb;Integrated Security=true";
+        private static readonly string developmentConnectionString = @"Data Source=M2L13003\BROTHMAN1;Initial Catalog=SpamDb;Integrated Security=true";
         private static readonly string testConnectionString = @"Data Source=DESKTOP-977JTTD\ROTH1;Initial Catalog=SpamDb;Integrated Security=true";
         private static readonly string productionConnectionString = @"Data Source=DESKTOP-977JTTD\ROTH1;Initial Catalog=SpamDb;Integrated Security=true";
         public static SqlConnection GetSqlConnection(SessionEnvironment environment)
