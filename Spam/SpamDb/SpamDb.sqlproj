@@ -22,6 +22,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -63,8 +64,26 @@
     <Folder Include="Programmability\Functions" />
     <Folder Include="Programmability\Functions\Table-valued Functions" />
     <Folder Include="Programmability\Functions\Scalar-valued Functions" />
+    <Folder Include="Security" />
+    <Folder Include="Security\Schemas" />
+    <Folder Include="Deployment" />
+    <Folder Include="Deployment\PostDeployment" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\SpamSession.sql" />
+    <Build Include="Tables\dbo.tbl_Session.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_SessionStatusEvent.sql" />
+    <Build Include="Tables\dbo.tbl_SessionStatus.sql" />
+    <Build Include="Security\Schemas\ref.sql" />
+    <Build Include="Tables\ref.tbl_SessionStatusEventType.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_SessionStatusEventTypeId.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_SessionStatusEvent_Start.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_SessionStatusEvent_End.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_SessionStatusEventTypeName.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="SpamDb.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Deployment\PostDeployment\PopulateReferenceTables.sql" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="985cd158-d1f3-4cab-86c7-bacfaea1a3c7" ChangeDateTime="08/11/2021 01:36:48">
+    <Property Name="ElementName" Value="[dbo].[SpamSession].[ID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SpamSession]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a5defa7c-3568-4375-9454-0e15874f4ac5" ChangeDateTime="08/11/2021 02:01:13">
+    <Property Name="ElementName" Value="[dbo].[SpamSession]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[dbo]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="tbl_Session" />
+  </Operation>
+</Operations>
