@@ -79,6 +79,7 @@
     <Build Include="Programmability\Stored Procedures\dbo.usp_SessionStatusEvent_Start.sql" />
     <Build Include="Programmability\Stored Procedures\dbo.usp_SessionStatusEvent_End.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_SessionStatusEventTypeName.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_GetSession.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SpamDb.refactorlog" />

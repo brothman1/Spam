@@ -2,6 +2,8 @@
 	@TypeId tinyint
 	,@Timestamp datetime2(7)
 	,@UserId nvarchar(32)
+	,@DomainName nvarchar(32)
+	,@DomainContainer nvarchar(128)
 	,@HostName nvarchar(128)
 	,@SessionId uniqueidentifier = null OUTPUT
 	,@ErrorMessage nvarchar(4000) = null OUTPUT
@@ -21,12 +23,16 @@ as
 				INSERT INTO dbo.tbl_Session
 					(
 					UserId
+					,DomainName
+					,DomainContainer
 					,HostName
 					)
 				OUTPUT	inserted.Id
 				INTO	@tbl_SessionId
 				VALUES	(
 						@UserId
+						,@DomainName
+						,@DomainContainer
 						,@HostName
 						)
 				--Capture new SessionId
