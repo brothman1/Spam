@@ -13,6 +13,15 @@
 		REFERENCES dbo.tbl_Session (Id)
 )
 GO
+CREATE UNIQUE NONCLUSTERED INDEX nci_ref_tbl_SecurityGroup_Name_DomainId on ref.tbl_SecurityGroup
+	(
+	Name
+	,DomainId
+	)
+	INCLUDE	(
+			Id
+			)
+GO
 CREATE NONCLUSTERED INDEX nci_ref_tbl_SecurityGroup_Name on ref.tbl_SecurityGroup
 	(
 	Name

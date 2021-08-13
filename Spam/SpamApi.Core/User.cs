@@ -12,7 +12,6 @@ namespace SpamApi.Core
     public class User : UserPrincipal
     {
         private static PrincipalContext _defaultContext = new PrincipalContext(ContextType.Domain, "GEICO", "dc=GEICO,dc=corp,dc=net");
-        private static IdentityType _defaultIdentityType = IdentityType.SamAccountName;
         private static string _defaultIdentityValue = Environment.UserName;
 
         [DirectoryProperty("department")]
@@ -23,17 +22,18 @@ namespace SpamApi.Core
         //Create DirectReports property.
         [DirectoryProperty("directreports")]
         public List<string> DirectReports => ExtensionGet("directreports").Select(x => x.ToString()).ToList();
+        public static IdentityType DefaultIdentityType { get; } = IdentityType.SamAccountName;
 
         public User(PrincipalContext context) : base(context)
         {
         }
 
-        public static User Get() => Get(_defaultContext, _defaultIdentityType, _defaultIdentityValue);
+        public static User Get() => Get(_defaultContext, DefaultIdentityType, _defaultIdentityValue);
         public static User Get(IdentityType identityType, string identityValue) => Get(_defaultContext, identityType, identityValue);
         public static User Get(string domainName, string domainContainer, string userId)
         {
             PrincipalContext context = new PrincipalContext(ContextType.Domain, domainName, domainContainer);
-            return Get(context, _defaultIdentityType, userId);
+            return Get(context, DefaultIdentityType, userId);
         }
         public static User Get(PrincipalContext context, IdentityType identityType, string identityValue)
         {

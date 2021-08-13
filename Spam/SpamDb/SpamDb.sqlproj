@@ -85,6 +85,10 @@
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_DomainId.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_DomainName.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_DomainContainer.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_SecurityGroupId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_SecurityGroupName.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_SecurityGroupDomainId.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_GetSecurityGroups.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SpamDb.refactorlog" />

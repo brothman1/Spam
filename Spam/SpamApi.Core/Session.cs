@@ -25,18 +25,21 @@ namespace SpamApi.Core
     }
     public class Session
     {
-
+        [JsonIgnore]
         public SessionEnvironment Environment { get; }
-        public Guid Id { get; private set; }
         [JsonIgnore]
         public User User { get; }
+        [JsonIgnore]
         public string HostName { get; private set; }
+        public Guid Id { get; private set; }
         public bool IsActive { get; private set; }
+        public string RelevantSecurityGroups { get; private set; }
         public Session(SessionEnvironment environment, string domainName, string domainContainer, string userId, string hostName)
         {
             Environment = environment;
             User = User.Get(domainName, domainContainer, userId);
             HostName = hostName;
+            RelevantSecurityGroups = GetRelevantSecurityGroups(domainName, domainContainer);
             Start();
         }
         public Session(SessionEnvironment environment, Guid id)
@@ -49,6 +52,7 @@ namespace SpamApi.Core
                 throw new Exception(errorMessage);
             }
             User = User.Get(domainName, domainContainer, userId);
+            RelevantSecurityGroups = GetRelevantSecurityGroups(domainName, domainContainer);
         }
         private void Start()
         {
@@ -114,6 +118,28 @@ namespace SpamApi.Core
                 IsActive = (bool)sessionInformation.Parameters["@IsActive"].Value;
                 errorMessage = sessionInformation.Parameters["@ErrorMessage"].Value.ToString();
             }
+        }
+        private string GetRelevantSecurityGroups(string domainName, string domainContainer)
+        {
+            List<string> securityGroups = new List<string>();
+            using (SqlCommand getSecurityGroups = new SqlCommand("dbo.usp_GetSecurityGroups", GetSqlConnection(Environment)))
+            {
+                getSecurityGroups.CommandType = CommandType.StoredProcedure;
+                getSecurityGroups.Parameters.Add(new SqlParameter("@DomainName", SqlDbType.NVarChar, 32) { Value = domainName });
+                getSecurityGroups.Parameters.Add(new SqlParameter("@DomainContainer", SqlDbType.NVarChar, 128) { Value = domainContainer });
+                getSecurityGroups.Parameters.Add(new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, 4000) { Direction = ParameterDirection.InputOutput });
+                getSecurityGroups.Connection.Open();
+                using (SqlDataReader getSecurityGroupsReader = getSecurityGroups.ExecuteReader())
+                {
+                    while (getSecurityGroupsReader.Read())
+                    {
+                        securityGroups.Add(getSecurityGroupsReader["Name"].ToString());
+                    }
+                    getSecurityGroupsReader.Close();
+                }
+                getSecurityGroups.Connection.Close();
+            }
+            return string.Join(",", securityGroups.Where(group => User.IsMemberOf(User.Context, User.DefaultIdentityType, group)));
         }
     }
 }

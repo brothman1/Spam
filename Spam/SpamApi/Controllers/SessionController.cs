@@ -19,8 +19,7 @@ namespace SpamApi.Controllers
             {
                 if (environment.TryParseEnum(out SessionEnvironment sessionEnvironment, out _, "None"))
                 {
-                    Session session = new Session(sessionEnvironment, domainName, domainContainer, userId, hostName);
-                    return Request.CreateResponse(HttpStatusCode.OK, session.Id);
+                    return Request.CreateResponse(HttpStatusCode.OK, new Session(sessionEnvironment, domainName, domainContainer, userId, hostName));
                 }
                 throw new ArgumentException($"{typeof(SessionEnvironment).Name} must be either {GetEnumValues<SessionEnvironment>(",", "or", "None")}");
             }
