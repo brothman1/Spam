@@ -11,9 +11,10 @@ as
 	BEGIN
 		SET NOCOUNT ON
 		DECLARE @TypeName nvarchar(32) = dbo.ufn_SessionStatusEventTypeName(@TypeId)
+		DECLARE @DomainId tinyint = dbo.ufn_DomainId(@DomainName,@DomainContainer)
 		IF @TypeName = N'Start'
 			BEGIN
-				exec dbo.usp_SessionStatusEvent_Start @TypeId, @Timestamp, @UserId, @DomainName, @DomainContainer, @HostName, @SessionId OUTPUT, @ErrorMessage OUTPUT
+				exec dbo.usp_SessionStatusEvent_Start @TypeId, @Timestamp, @UserId, @DomainId, @HostName, @SessionId OUTPUT, @ErrorMessage OUTPUT
 			END
 		IF @TypeName = N'End'
 			BEGIN

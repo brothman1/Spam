@@ -80,6 +80,11 @@
     <Build Include="Programmability\Stored Procedures\dbo.usp_SessionStatusEvent_End.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_SessionStatusEventTypeName.sql" />
     <Build Include="Programmability\Stored Procedures\dbo.usp_GetSession.sql" />
+    <Build Include="Tables\ref.tbl_SecurityGroup.sql" />
+    <Build Include="Tables\ref.tbl_Domain.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_DomainId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_DomainName.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_DomainContainer.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SpamDb.refactorlog" />

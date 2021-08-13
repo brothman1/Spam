@@ -43,7 +43,11 @@ namespace SpamApi.Core
         {
             Environment = environment;
             Id = id;
-            GetSessionInformation(out string userId, out string domainName, out string domainContainer);
+            GetSessionInformation(out string userId, out string domainName, out string domainContainer, out string errorMessage);
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                throw new Exception(errorMessage);
+            }
             User = User.Get(domainName, domainContainer, userId);
         }
         private void Start()
@@ -84,7 +88,7 @@ namespace SpamApi.Core
                 errorMessage = statusEvent.Parameters["@ErrorMessage"].Value.ToString();
             }
         }
-        private void GetSessionInformation(out string userId, out string domainName, out string domainContainer)
+        private void GetSessionInformation(out string userId, out string domainName, out string domainContainer, out string errorMessage)
         {
             using (SqlCommand sessionInformation = new SqlCommand("dbo.usp_GetSession", GetSqlConnection(Environment)))
             {
@@ -99,11 +103,16 @@ namespace SpamApi.Core
                 sessionInformation.Connection.Open();
                 sessionInformation.ExecuteNonQuery();
                 sessionInformation.Connection.Close();
+                if (DBNull.Value.Equals(sessionInformation.Parameters["@UserId"].Value))
+                {
+                    throw new ArgumentException("SessionId not found!");
+                }
                 userId = sessionInformation.Parameters["@UserId"].Value.ToString();
                 domainName = sessionInformation.Parameters["@DomainName"].Value.ToString();
                 domainContainer = sessionInformation.Parameters["@DomainContainer"].Value.ToString();
                 HostName = sessionInformation.Parameters["@HostName"].Value.ToString();
                 IsActive = (bool)sessionInformation.Parameters["@IsActive"].Value;
+                errorMessage = sessionInformation.Parameters["@ErrorMessage"].Value.ToString();
             }
         }
     }

@@ -24,8 +24,8 @@ as
 			WHERE		a.SessionId = @SessionId
 			--Return Session
 			SELECT		@UserId = a.UserId
-						,@DomainName = a.DomainName
-						,@DomainContainer = a.DomainContainer
+						,@DomainName = dbo.ufn_DomainName(a.DomainId)
+						,@DomainContainer = dbo.ufn_DomainContainer(a.DomainId)
 						,@HostName = a.HostName
 						,@IsActive = b.IsActive
 			FROM		dbo.tbl_Session as a

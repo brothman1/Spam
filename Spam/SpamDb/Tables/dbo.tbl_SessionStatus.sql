@@ -13,6 +13,16 @@
 		REFERENCES ref.tbl_SessionStatusEventType (Id)
 	)
 GO
+CREATE NONCLUSTERED INDEX nci_dbo_tbl_SessionStatus_SessionId on dbo.tbl_SessionStatus
+	(
+	SessionId
+	)
+	INCLUDE	(
+			Id
+			,EventTypeId
+			,EventTimestamp
+			)
+GO
 CREATE NONCLUSTERED INDEX nci_dbo_tbl_SessionStatus_SessionId_EventTypeId on dbo.tbl_SessionStatus
 	(
 	SessionId
