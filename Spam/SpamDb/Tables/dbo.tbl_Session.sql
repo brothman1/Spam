@@ -5,12 +5,12 @@
 	,DomainId tinyint not null
 	,HostName nvarchar(128) not null
 	,RecordAppend datetime2(7) default sysdatetime() not null
-	,CONSTRAINT fk_dbo_tbl_Session_DomainId
+	,CONSTRAINT fk_tbl_Session_DomainId
 		FOREIGN KEY (DomainId)
 		REFERENCES ref.tbl_Domain (Id)
 	)
 GO
-CREATE NONCLUSTERED INDEX nci_dbo_tbl_Session_UserId on dbo.tbl_Session
+CREATE NONCLUSTERED INDEX nci_tbl_Session_UserId on dbo.tbl_Session
 	(
 	UserId
 	)
@@ -20,7 +20,7 @@ CREATE NONCLUSTERED INDEX nci_dbo_tbl_Session_UserId on dbo.tbl_Session
 			,HostName
 			)
 GO
-CREATE NONCLUSTERED INDEX nci_dbo_tbl_Session_DomainId on dbo.tbl_Session
+CREATE NONCLUSTERED INDEX nci_tbl_Session_DomainId on dbo.tbl_Session
 	(
 	DomainId
 	)
@@ -30,7 +30,7 @@ CREATE NONCLUSTERED INDEX nci_dbo_tbl_Session_DomainId on dbo.tbl_Session
 			,HostName
 			)
 GO
-CREATE NONCLUSTERED INDEX nci_dbo_tbl_Session_HostName on dbo.tbl_Session
+CREATE NONCLUSTERED INDEX nci_tbl_Session_HostName on dbo.tbl_Session
 	(
 	HostName
 	)

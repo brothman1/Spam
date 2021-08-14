@@ -6,7 +6,7 @@
 	,RecordAppend datetime2(7) not null default sysdatetime()
 )
 GO
-CREATE UNIQUE NONCLUSTERED INDEX nci_ref_tbl_Domain_Name_Container on ref.tbl_Domain
+CREATE UNIQUE NONCLUSTERED INDEX nci_tbl_Domain_Name_Container on ref.tbl_Domain
 	(
 	Name
 	,Container

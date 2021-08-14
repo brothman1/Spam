@@ -6,7 +6,7 @@
 	,UpdateTimestamp datetime2(7) not null default sysdatetime()
 )
 GO
-CREATE UNIQUE NONCLUSTERED INDEX nci_ref_SessionStatusEventType on ref.tbl_SessionStatusEventType 
+CREATE UNIQUE NONCLUSTERED INDEX nci_SessionStatusEventType on ref.tbl_SessionStatusEventType 
 	(
 	Name
 	)

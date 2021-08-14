@@ -5,15 +5,15 @@
 	,DomainId tinyint not null
 	,AppendSessionId uniqueidentifier not null
 	,RecordAppend datetime2(7) not null default sysdatetime()
-	,CONSTRAINT fk_ref_tbl_SecurityGroup_DomainId
+	,CONSTRAINT fk_tbl_SecurityGroup_DomainId
 		FOREIGN KEY (DomainId)
 		REFERENCES ref.tbl_Domain (Id)
-	,CONSTRAINT fk_ref_tbl_SecurityGroup_AppendSessionId
+	,CONSTRAINT fk_tbl_SecurityGroup_AppendSessionId
 		FOREIGN KEY (AppendSessionId)
 		REFERENCES dbo.tbl_Session (Id)
 )
 GO
-CREATE UNIQUE NONCLUSTERED INDEX nci_ref_tbl_SecurityGroup_Name_DomainId on ref.tbl_SecurityGroup
+CREATE UNIQUE NONCLUSTERED INDEX nci_tbl_SecurityGroup_Name_DomainId on ref.tbl_SecurityGroup
 	(
 	Name
 	,DomainId
@@ -22,7 +22,7 @@ CREATE UNIQUE NONCLUSTERED INDEX nci_ref_tbl_SecurityGroup_Name_DomainId on ref.
 			Id
 			)
 GO
-CREATE NONCLUSTERED INDEX nci_ref_tbl_SecurityGroup_Name on ref.tbl_SecurityGroup
+CREATE NONCLUSTERED INDEX nci_tbl_SecurityGroup_Name on ref.tbl_SecurityGroup
 	(
 	Name
 	)
@@ -31,7 +31,7 @@ CREATE NONCLUSTERED INDEX nci_ref_tbl_SecurityGroup_Name on ref.tbl_SecurityGrou
 			,DomainId
 			)
 GO
-CREATE NONCLUSTERED INDEX nci_ref_tbl_SecurityGroup_DomainId on ref.tbl_SecurityGroup
+CREATE NONCLUSTERED INDEX nci_tbl_SecurityGroup_DomainId on ref.tbl_SecurityGroup
 	(
 	DomainId
 	)
