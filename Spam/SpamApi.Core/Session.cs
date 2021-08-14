@@ -34,13 +34,14 @@ namespace SpamApi.Core
         public Guid Id { get; private set; }
         public bool IsActive { get; private set; }
         public string RelevantSecurityGroups { get; private set; }
-        public Session(SessionEnvironment environment, string domainName, string domainContainer, string userId, string hostName)
+        public Session(SessionEnvironment environment, byte domainId, string userId, string hostName)
         {
             Environment = environment;
+            GetDomainNameAndContainer(domainId, out string domainName, out string domainContainer);
             User = User.Get(domainName, domainContainer, userId);
             HostName = hostName;
             RelevantSecurityGroups = GetRelevantSecurityGroups(domainName, domainContainer);
-            Start();
+            Start(domainId);
         }
         public Session(SessionEnvironment environment, Guid id)
         {
@@ -54,9 +55,9 @@ namespace SpamApi.Core
             User = User.Get(domainName, domainContainer, userId);
             RelevantSecurityGroups = GetRelevantSecurityGroups(domainName, domainContainer);
         }
-        private void Start()
+        private void Start(byte domainId)
         {
-            ExecuteStatusEvent((int)SessionStatusEventType.Start, GetEasternTimestamp(), User.SamAccountName, User.Context.Name, User.Context.Container, HostName, out string errorMessage);
+            ExecuteStatusEvent((int)SessionStatusEventType.Start, GetEasternTimestamp(), User.SamAccountName, domainId, HostName, out string errorMessage);
             if (!string.IsNullOrEmpty(errorMessage))
             {
                 throw new Exception(errorMessage);
@@ -65,14 +66,14 @@ namespace SpamApi.Core
         }
         public void End()
         {
-            ExecuteStatusEvent((int)SessionStatusEventType.End, GetEasternTimestamp(), null, null, null, null, out string errorMessage);
+            ExecuteStatusEvent((int)SessionStatusEventType.End, GetEasternTimestamp(), default, default, default, out string errorMessage);
             if (!string.IsNullOrEmpty(errorMessage))
             {
                 throw new Exception(errorMessage);
             }
             IsActive = false;
         }
-        private void ExecuteStatusEvent(byte typeId, DateTime timestamp, string userId, string domainName, string domainContainer, string hostName, out string errorMessage)
+        private void ExecuteStatusEvent(byte typeId, DateTime timestamp, string userId, byte domainId, string hostName, out string errorMessage)
         {
             using (SqlCommand statusEvent = new SqlCommand("dbo.usp_SessionStatusEvent", GetSqlConnection(Environment)))
             {
@@ -80,8 +81,7 @@ namespace SpamApi.Core
                 statusEvent.Parameters.Add(new SqlParameter("@TypeId", SqlDbType.TinyInt) { Value = typeId });
                 statusEvent.Parameters.Add(new SqlParameter("@Timestamp", SqlDbType.DateTime2, 7) { Value = timestamp });
                 statusEvent.Parameters.Add(new SqlParameter("@UserId", SqlDbType.NVarChar, 32) { Value = userId });
-                statusEvent.Parameters.Add(new SqlParameter("@DomainName", SqlDbType.NVarChar, 32) { Value = domainName });
-                statusEvent.Parameters.Add(new SqlParameter("@DomainContainer", SqlDbType.NVarChar, 128) { Value = domainContainer });
+                statusEvent.Parameters.Add(new SqlParameter("@DomainId", SqlDbType.TinyInt) { Value = domainId });
                 statusEvent.Parameters.Add(new SqlParameter("@HostName", SqlDbType.NVarChar, 128) { Value = hostName });
                 statusEvent.Parameters.Add(new SqlParameter("@SessionId", SqlDbType.UniqueIdentifier) { Direction = ParameterDirection.InputOutput, Value = Id });
                 statusEvent.Parameters.Add(new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, 4000) { Direction = ParameterDirection.InputOutput });
@@ -140,6 +140,21 @@ namespace SpamApi.Core
                 getSecurityGroups.Connection.Close();
             }
             return string.Join(",", securityGroups.Where(group => User.IsMemberOf(User.Context, User.DefaultIdentityType, group)));
+        }
+        private void GetDomainNameAndContainer(byte domainId, out string domainName, out string domainContainer)
+        {
+            using (SqlCommand getDomainNameAndContainer = new SqlCommand("dbo.usp_GetDomainNameAndContainer", GetSqlConnection(Environment)))
+            {
+                getDomainNameAndContainer.CommandType = CommandType.StoredProcedure;
+                getDomainNameAndContainer.Parameters.Add(new SqlParameter("@DomainId", SqlDbType.TinyInt) { Value = domainId });
+                getDomainNameAndContainer.Parameters.Add(new SqlParameter("@DomainName", SqlDbType.NVarChar, 32) { Direction = ParameterDirection.InputOutput });
+                getDomainNameAndContainer.Parameters.Add(new SqlParameter("@DomainContainer", SqlDbType.NVarChar, 128) { Direction = ParameterDirection.InputOutput });
+                getDomainNameAndContainer.Connection.Open();
+                getDomainNameAndContainer.ExecuteNonQuery();
+                getDomainNameAndContainer.Connection.Close();
+                domainName = getDomainNameAndContainer.Parameters["@DomainName"].Value.ToString();
+                domainContainer = getDomainNameAndContainer.Parameters["@DomainContainer"].Value.ToString();
+            }
         }
     }
 }

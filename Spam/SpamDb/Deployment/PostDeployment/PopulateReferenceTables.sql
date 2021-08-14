@@ -28,10 +28,85 @@ IF dbo.ufn_DomainId('GEICO','dc=GEICO,dc=corp,dc=net') is null
             )
         VALUES (1,'GEICO','dc=GEICO,dc=corp,dc=net')
     END
+--Populate Permissions
+IF dbo.ufn_PermissionId('Get') is null
+    BEGIN
+        INSERT INTO ref.tbl_Permission
+            (
+            Id
+            ,Name
+            )
+        VALUES (1, 'Get')
+    END
+IF dbo.ufn_PermissionId('Post') is null
+    BEGIN
+        INSERT INTO ref.tbl_Permission
+            (
+            Id
+            ,Name
+            )
+        VALUES (2, 'Post')
+    END
+IF dbo.ufn_PermissionId('PostMany') is null
+    BEGIN
+        INSERT INTO ref.tbl_Permission
+            (
+            Id
+            ,Name
+            )
+        VALUES (3, 'PostMany')
+    END
+IF dbo.ufn_PermissionId('Put') is null
+    BEGIN
+        INSERT INTO ref.tbl_Permission
+            (
+            Id
+            ,Name
+            )
+        VALUES (4, 'Put')
+    END
+IF dbo.ufn_PermissionId('PutMany') is null
+    BEGIN
+        INSERT INTO ref.tbl_Permission
+            (
+            Id
+            ,Name
+            )
+        VALUES (5, 'PutMany')
+    END
+IF dbo.ufn_PermissionId('Delete') is null
+    BEGIN
+        INSERT INTO ref.tbl_Permission
+            (
+            Id
+            ,Name
+            )
+        VALUES (6, 'Delete')
+    END
+IF dbo.ufn_PermissionId('DeleteMany') is null
+    BEGIN
+        INSERT INTO ref.tbl_Permission
+            (
+            Id
+            ,Name
+            )
+        VALUES (7, 'DeleteMany')
+    END
+IF dbo.ufn_PermissionId('Control') is null
+    BEGIN
+        INSERT INTO ref.tbl_Permission
+            (
+            Id
+            ,Name
+            )
+        VALUES (8, 'Control')
+    END
+--Populate user
+exec admin.usp_AddUser 1, 'U71ODH'
 --Create base session
 DECLARE		@Timestamp datetime2(7) = sysdatetime()
 DECLARE     @SessionId uniqueidentifier
-exec dbo.usp_SessionStatusEvent 1,@Timestamp,'U71ODH','GEICO','dc=GEICO,dc=corp,dc=net','M2L13003',@SessionId OUTPUT
+exec dbo.usp_SessionStatusEvent 1,@Timestamp,'U71ODH',1,'M2L13003',@SessionId OUTPUT
 --Populate SecurityGroup
 IF (dbo.ufn_SecurityGroupId('ENT-FS-REGIONAL-DATAINTEL-C',1) is null)
     BEGIN

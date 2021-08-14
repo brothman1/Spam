@@ -89,6 +89,17 @@
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_SecurityGroupName.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_SecurityGroupDomainId.sql" />
     <Build Include="Programmability\Stored Procedures\dbo.usp_GetSecurityGroups.sql" />
+    <Build Include="Tables\ref.tbl_Permission.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_PermissionId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_PermissionName.sql" />
+    <Build Include="Tables\dbo.tbl_CatalogPermission.sql" />
+    <Build Include="Tables\dbo.tbl_Catalog.sql" />
+    <Build Include="Tables\admin.tbl_User.sql" />
+    <Build Include="Security\Schemas\admin.sql" />
+    <Build Include="Programmability\Stored Procedures\admin.usp_AddUser.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\admin.ufn_IsAdmin.sql" />
+    <Build Include="Programmability\Stored Procedures\admin.usp_DeleteUser.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_GetDomainNameAndContainer.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SpamDb.refactorlog" />
