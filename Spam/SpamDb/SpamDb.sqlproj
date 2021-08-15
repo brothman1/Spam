@@ -71,15 +71,15 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\dbo.tbl_Session.sql" />
-    <Build Include="Programmability\Stored Procedures\dbo.usp_SessionStatusEvent.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PostSessionStatusEvent.sql" />
     <Build Include="Tables\dbo.tbl_SessionStatus.sql" />
     <Build Include="Security\Schemas\ref.sql" />
     <Build Include="Tables\ref.tbl_SessionStatusEventType.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_SessionStatusEventTypeId.sql" />
-    <Build Include="Programmability\Stored Procedures\dbo.usp_SessionStatusEvent_Start.sql" />
-    <Build Include="Programmability\Stored Procedures\dbo.usp_SessionStatusEvent_End.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PostSessionStatusEvent_Start.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PostSessionStatusEvent_End.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_SessionStatusEventTypeName.sql" />
-    <Build Include="Programmability\Stored Procedures\dbo.usp_GetSession.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_GetSessionInformation.sql" />
     <Build Include="Tables\ref.tbl_SecurityGroup.sql" />
     <Build Include="Tables\ref.tbl_Domain.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_DomainId.sql" />

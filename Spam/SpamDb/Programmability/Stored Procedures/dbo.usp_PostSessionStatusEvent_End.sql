@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE dbo.usp_SessionStatusEvent_End
+﻿CREATE PROCEDURE dbo.usp_PostSessionStatusEvent_End
 	@TypeId tinyint
 	,@Timestamp datetime2(7)
 	,@SessionId uniqueidentifier

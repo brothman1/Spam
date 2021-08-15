@@ -57,7 +57,7 @@ namespace SpamApi.Core
         }
         private void Start(byte domainId)
         {
-            ExecuteStatusEvent((int)SessionStatusEventType.Start, GetEasternTimestamp(), User.SamAccountName, domainId, HostName, out string errorMessage);
+            PostStatusEvent((int)SessionStatusEventType.Start, GetEasternTimestamp(), User.SamAccountName, domainId, HostName, out string errorMessage);
             if (!string.IsNullOrEmpty(errorMessage))
             {
                 throw new Exception(errorMessage);
@@ -66,16 +66,16 @@ namespace SpamApi.Core
         }
         public void End()
         {
-            ExecuteStatusEvent((int)SessionStatusEventType.End, GetEasternTimestamp(), default, default, default, out string errorMessage);
+            PostStatusEvent((int)SessionStatusEventType.End, GetEasternTimestamp(), default, default, default, out string errorMessage);
             if (!string.IsNullOrEmpty(errorMessage))
             {
                 throw new Exception(errorMessage);
             }
             IsActive = false;
         }
-        private void ExecuteStatusEvent(byte typeId, DateTime timestamp, string userId, byte domainId, string hostName, out string errorMessage)
+        private void PostStatusEvent(byte typeId, DateTime timestamp, string userId, byte domainId, string hostName, out string errorMessage)
         {
-            using (SqlCommand statusEvent = new SqlCommand("dbo.usp_SessionStatusEvent", GetSqlConnection(Environment)))
+            using (SqlCommand statusEvent = new SqlCommand("dbo.usp_PostSessionStatusEvent", GetSqlConnection(Environment)))
             {
                 statusEvent.CommandType = CommandType.StoredProcedure;
                 statusEvent.Parameters.Add(new SqlParameter("@TypeId", SqlDbType.TinyInt) { Value = typeId });
@@ -94,7 +94,7 @@ namespace SpamApi.Core
         }
         private void GetSessionInformation(out string userId, out string domainName, out string domainContainer, out string errorMessage)
         {
-            using (SqlCommand sessionInformation = new SqlCommand("dbo.usp_GetSession", GetSqlConnection(Environment)))
+            using (SqlCommand sessionInformation = new SqlCommand("dbo.usp_GetSessionInformation", GetSqlConnection(Environment)))
             {
                 sessionInformation.CommandType = CommandType.StoredProcedure;
                 sessionInformation.Parameters.Add(new SqlParameter("@SessionId", SqlDbType.UniqueIdentifier) { Value = Id });

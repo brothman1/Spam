@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE dbo.usp_GetSession
+﻿CREATE PROCEDURE dbo.usp_GetSessionInformation
 	@SessionId uniqueidentifier
 	,@UserId nvarchar(32) = null OUTPUT
 	,@DomainName nvarchar(32) = null OUTPUT

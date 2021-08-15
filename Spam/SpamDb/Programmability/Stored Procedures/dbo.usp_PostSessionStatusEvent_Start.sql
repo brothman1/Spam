@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE dbo.usp_SessionStatusEvent_Start
+﻿CREATE PROCEDURE dbo.usp_PostSessionStatusEvent_Start
 	@TypeId tinyint
 	,@Timestamp datetime2(7)
 	,@UserId nvarchar(32)

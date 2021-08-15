@@ -88,7 +88,7 @@ exec admin.usp_AddUser 1, 'U71ODH'
 --Create base session
 DECLARE		@Timestamp datetime2(7) = sysdatetime()
 DECLARE     @SessionId uniqueidentifier
-exec dbo.usp_SessionStatusEvent 1,@Timestamp,'U71ODH',1,'M2L13003',@SessionId OUTPUT
+exec dbo.usp_PostSessionStatusEvent 1,@Timestamp,'U71ODH',1,'M2L13003',@SessionId OUTPUT
 --Populate SecurityGroup
 exec dbo.usp_PostSecurityGroup 'ENT-FS-REGIONAL-DATAINTEL-C',1,@SessionId
 --Populate Environment

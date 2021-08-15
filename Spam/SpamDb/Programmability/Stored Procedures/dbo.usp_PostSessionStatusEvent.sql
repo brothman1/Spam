@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE dbo.usp_SessionStatusEvent
+﻿CREATE PROCEDURE dbo.usp_PostSessionStatusEvent
 	@TypeId tinyint
 	,@Timestamp datetime2(7)
 	,@UserId nvarchar(32) = null
@@ -12,10 +12,10 @@ as
 		DECLARE @TypeName nvarchar(32) = dbo.ufn_SessionStatusEventTypeName(@TypeId)
 		IF @TypeName = N'Start'
 			BEGIN
-				exec dbo.usp_SessionStatusEvent_Start @TypeId, @Timestamp, @UserId, @DomainId, @HostName, @SessionId OUTPUT, @ErrorMessage OUTPUT
+				exec dbo.usp_PostSessionStatusEvent_Start @TypeId, @Timestamp, @UserId, @DomainId, @HostName, @SessionId OUTPUT, @ErrorMessage OUTPUT
 			END
 		IF @TypeName = N'End'
 			BEGIN
-				exec dbo.usp_SessionStatusEvent_End @TypeId, @Timestamp, @SessionId, @ErrorMessage OUTPUT
+				exec dbo.usp_PostSessionStatusEvent_End @TypeId, @Timestamp, @SessionId, @ErrorMessage OUTPUT
 			END
 	END
