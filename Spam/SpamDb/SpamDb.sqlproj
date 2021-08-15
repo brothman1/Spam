@@ -100,6 +100,12 @@
     <Build Include="Programmability\Functions\Scalar-valued Functions\admin.ufn_IsAdmin.sql" />
     <Build Include="Programmability\Stored Procedures\admin.usp_DeleteUser.sql" />
     <Build Include="Programmability\Stored Procedures\dbo.usp_GetDomainNameAndContainer.sql" />
+    <Build Include="Tables\ref.tbl_Environment.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_EnvironmentId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_EnvironmentName.sql" />
+    <Build Include="Tables\ref.tbl_Database.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PostSecurityGroup.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PostEnvironment.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SpamDb.refactorlog" />

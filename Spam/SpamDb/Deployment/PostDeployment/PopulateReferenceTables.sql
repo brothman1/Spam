@@ -38,41 +38,23 @@ IF dbo.ufn_PermissionId('Get') is null
             )
         VALUES (1, 'Get')
     END
-IF dbo.ufn_PermissionId('Post') is null
+IF dbo.ufn_PermissionId('Set') is null
     BEGIN
         INSERT INTO ref.tbl_Permission
             (
             Id
             ,Name
             )
-        VALUES (2, 'Post')
+        VALUES (2, 'Set')
     END
-IF dbo.ufn_PermissionId('PostMany') is null
+IF dbo.ufn_PermissionId('SetMany') is null
     BEGIN
         INSERT INTO ref.tbl_Permission
             (
             Id
             ,Name
             )
-        VALUES (3, 'PostMany')
-    END
-IF dbo.ufn_PermissionId('Put') is null
-    BEGIN
-        INSERT INTO ref.tbl_Permission
-            (
-            Id
-            ,Name
-            )
-        VALUES (4, 'Put')
-    END
-IF dbo.ufn_PermissionId('PutMany') is null
-    BEGIN
-        INSERT INTO ref.tbl_Permission
-            (
-            Id
-            ,Name
-            )
-        VALUES (5, 'PutMany')
+        VALUES (3, 'SetMany')
     END
 IF dbo.ufn_PermissionId('Delete') is null
     BEGIN
@@ -101,20 +83,15 @@ IF dbo.ufn_PermissionId('Control') is null
             )
         VALUES (8, 'Control')
     END
---Populate user
+--Populate User
 exec admin.usp_AddUser 1, 'U71ODH'
 --Create base session
 DECLARE		@Timestamp datetime2(7) = sysdatetime()
 DECLARE     @SessionId uniqueidentifier
 exec dbo.usp_SessionStatusEvent 1,@Timestamp,'U71ODH',1,'M2L13003',@SessionId OUTPUT
 --Populate SecurityGroup
-IF (dbo.ufn_SecurityGroupId('ENT-FS-REGIONAL-DATAINTEL-C',1) is null)
-    BEGIN
-        INSERT INTO ref.tbl_SecurityGroup
-            (
-            Name
-	        ,DomainId
-            ,AppendSessionId
-            )
-        VALUES ('ENT-FS-REGIONAL-DATAINTEL-C',1,@SessionId)
-    END
+exec dbo.usp_PostSecurityGroup 'ENT-FS-REGIONAL-DATAINTEL-C',1,@SessionId
+--Populate Environment
+exec dbo.usp_PostEnvironment 'Development',@SessionId
+exec dbo.usp_PostEnvironment 'Test',@SessionId
+exec dbo.usp_PostEnvironment 'Production',@SessionId

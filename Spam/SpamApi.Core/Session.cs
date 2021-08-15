@@ -149,11 +149,17 @@ namespace SpamApi.Core
                 getDomainNameAndContainer.Parameters.Add(new SqlParameter("@DomainId", SqlDbType.TinyInt) { Value = domainId });
                 getDomainNameAndContainer.Parameters.Add(new SqlParameter("@DomainName", SqlDbType.NVarChar, 32) { Direction = ParameterDirection.InputOutput });
                 getDomainNameAndContainer.Parameters.Add(new SqlParameter("@DomainContainer", SqlDbType.NVarChar, 128) { Direction = ParameterDirection.InputOutput });
+                getDomainNameAndContainer.Parameters.Add(new SqlParameter("@ErrorMessage", SqlDbType.NVarChar, 4000) { Direction = ParameterDirection.InputOutput });
                 getDomainNameAndContainer.Connection.Open();
                 getDomainNameAndContainer.ExecuteNonQuery();
                 getDomainNameAndContainer.Connection.Close();
                 domainName = getDomainNameAndContainer.Parameters["@DomainName"].Value.ToString();
                 domainContainer = getDomainNameAndContainer.Parameters["@DomainContainer"].Value.ToString();
+                string errorMessage = getDomainNameAndContainer.Parameters["@ErrorMessage"].Value.ToString();
+                if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    throw new Exception(errorMessage);
+                }
             }
         }
     }
