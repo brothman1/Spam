@@ -1,0 +1,1 @@
+﻿CREATE CERTIFICATE ConnectionStringCertificate WITH SUBJECT = 'Protect connection strings'

@@ -68,6 +68,8 @@
     <Folder Include="Security\Schemas" />
     <Folder Include="Deployment" />
     <Folder Include="Deployment\PostDeployment" />
+    <Folder Include="Security\Certificates" />
+    <Folder Include="Security\Symmetric Keys" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\dbo.tbl_Session.sql" />
@@ -103,9 +105,21 @@
     <Build Include="Tables\ref.tbl_Environment.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_EnvironmentId.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_EnvironmentName.sql" />
-    <Build Include="Tables\ref.tbl_Database.sql" />
     <Build Include="Programmability\Stored Procedures\dbo.usp_PostSecurityGroup.sql" />
     <Build Include="Programmability\Stored Procedures\dbo.usp_PostEnvironment.sql" />
+    <Build Include="Tables\ref.tbl_ConnectionGroup.sql" />
+    <Build Include="Tables\ref.tbl_Connection.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_ConnectionGroupId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_ConnectionGroupName.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PostConnectionGroup.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PostConnection.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_ConnectionId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_ConnectionConnectionGroupId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_ConnectionEnvironmentId.sql" />
+    <Build Include="Security\Certificates\ConnectionStringCertificate.sql" />
+    <Build Include="Security\Symmetric Keys\ConnectionStringSymmetricKey.sql" />
+    <Build Include="Security\MasterKey.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PutConnection.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SpamDb.refactorlog" />

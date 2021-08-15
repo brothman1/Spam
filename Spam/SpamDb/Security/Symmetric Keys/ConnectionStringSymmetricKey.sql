@@ -1,0 +1,1 @@
+﻿CREATE SYMMETRIC KEY ConnectionStringSymmetricKey WITH ALGORITHM = AES_256 ENCRYPTION BY CERTIFICATE ConnectionStringCertificate

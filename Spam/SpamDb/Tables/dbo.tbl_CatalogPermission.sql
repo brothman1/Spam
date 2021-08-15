@@ -5,6 +5,7 @@
 	,SecurityGroupId uniqueidentifier not null
 	,PermissionId tinyint not null
 	,PermissionValue bit not null
+	,RecordHash varbinary(32) not null
 	,AppendSessionId uniqueidentifier not null
 	,RecordAppend datetime2(7) not null default sysdatetime()
 	,UpdateSessionId uniqueidentifier not null
