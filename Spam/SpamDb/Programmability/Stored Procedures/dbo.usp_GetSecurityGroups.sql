@@ -15,3 +15,4 @@ as
 			SET @ErrorMessage = error_message()
 		END CATCH
 	END
+GO

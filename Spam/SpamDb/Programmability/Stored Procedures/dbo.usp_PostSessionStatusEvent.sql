@@ -19,3 +19,4 @@ as
 				exec dbo.usp_PostSessionStatusEvent_End @TypeId, @Timestamp, @SessionId, @ErrorMessage OUTPUT
 			END
 	END
+GO

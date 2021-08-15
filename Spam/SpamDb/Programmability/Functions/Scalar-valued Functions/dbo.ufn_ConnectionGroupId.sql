@@ -11,3 +11,4 @@ as
 		WHERE		a.Name = @ConnectionGroupName
 		RETURN		@ConnectionGroupId
 	END
+GO

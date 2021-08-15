@@ -1,5 +1,5 @@
 ﻿CREATE TABLE ref.tbl_SecurityGroup
-(
+	(
 	Id uniqueidentifier not null default newid() PRIMARY KEY CLUSTERED
 	,Name nvarchar(128) not null
 	,DomainId tinyint not null
@@ -11,7 +11,7 @@
 	,CONSTRAINT fk_tbl_SecurityGroup_AppendSessionId
 		FOREIGN KEY (AppendSessionId)
 		REFERENCES dbo.tbl_Session (Id)
-)
+	)
 GO
 CREATE UNIQUE NONCLUSTERED INDEX nci_tbl_SecurityGroup_Name_DomainId on ref.tbl_SecurityGroup
 	(

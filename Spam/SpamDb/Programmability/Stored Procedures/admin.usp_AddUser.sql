@@ -20,3 +20,4 @@ as
 				PRINT 'User is already an admin!'
 			END
 	END
+GO

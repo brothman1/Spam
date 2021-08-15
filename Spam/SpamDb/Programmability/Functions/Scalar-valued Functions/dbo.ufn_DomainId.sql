@@ -13,3 +13,4 @@ as
 					and a.Container = @DomainContainer
 		RETURN		@DomainId
 	END
+GO

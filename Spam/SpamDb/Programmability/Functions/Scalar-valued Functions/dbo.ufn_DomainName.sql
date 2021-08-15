@@ -11,3 +11,4 @@ as
 		WHERE		a.Id = @DomainId
 		RETURN		@DomainName
 	END
+GO

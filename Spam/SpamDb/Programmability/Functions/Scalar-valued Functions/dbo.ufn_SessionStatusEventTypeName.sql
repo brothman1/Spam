@@ -11,3 +11,4 @@ as
 		WHERE		a.Id = @SessionEventTypeId
 		RETURN		@SessionEventTypeName
 	END
+GO

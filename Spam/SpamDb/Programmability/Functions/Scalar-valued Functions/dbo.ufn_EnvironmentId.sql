@@ -11,3 +11,4 @@ as
 		WHERE		a.Name = @EnvironmentName
 		RETURN		@EnvironmentId
 	END
+GO

@@ -9,7 +9,6 @@
 	,RecordAppend datetime2(7) not null default sysdatetime()
 	,UpdateSessionId uniqueidentifier not null
 	,RecordUpdate datetime2(7) not null default sysdatetime()
-	,CONSTRAINT cnst_tbl_Connection_GroupId_EnvironmentId UNIQUE (GroupId, EnvironmentId)
 	,CONSTRAINT fk_tbl_Connection_GroupId
 		FOREIGN KEY (GroupId)
 		REFERENCES ref.tbl_ConnectionGroup (Id)
@@ -23,4 +22,14 @@
 		FOREIGN KEY (UpdateSessionId)
 		REFERENCES dbo.tbl_Session (Id)
 	)
+GO
+CREATE UNIQUE NONCLUSTERED INDEX nci_tbl_Connection_GroupId_EnvironmentId on ref.tbl_Connection
+	(
+	GroupId
+	,EnvironmentId
+	)
+	INCLUDE	(
+			Id
+			,EncryptedConnectionString
+			)
 GO

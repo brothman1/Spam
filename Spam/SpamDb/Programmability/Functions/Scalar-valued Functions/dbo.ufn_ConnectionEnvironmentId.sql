@@ -11,3 +11,4 @@ as
 		WHERE		a.Id = @ConnectionId
 		RETURN		@ConnectionEnvironmentId
 	END
+GO

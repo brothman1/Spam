@@ -13,3 +13,4 @@ as
 					and a.DomainId = @SecurityGroupDomainId
 		RETURN		@SecurityGroupId
 	END
+GO

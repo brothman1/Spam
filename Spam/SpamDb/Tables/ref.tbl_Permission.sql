@@ -12,3 +12,4 @@ CREATE UNIQUE NONCLUSTERED INDEX nci_tbl_Permission_Name on ref.tbl_Permission
 	INCLUDE	(
 			Id
 			)
+GO

@@ -13,3 +13,4 @@ as
 					and a.EnvironmentId = @ConnectionEnvironmentId
 		RETURN		@ConnectionId
 	END
+GO

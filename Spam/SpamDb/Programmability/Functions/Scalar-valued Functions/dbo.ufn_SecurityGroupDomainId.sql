@@ -11,3 +11,4 @@ as
 		WHERE		a.Id = @SecurityGroupId
 		RETURN		@SecurityGroupDomainId
 	END
+GO

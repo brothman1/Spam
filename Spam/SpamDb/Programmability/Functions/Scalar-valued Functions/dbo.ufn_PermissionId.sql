@@ -11,3 +11,4 @@ as
 		WHERE		a.Name = @PermissionName
 		RETURN		@PermissionId
 	END
+GO
