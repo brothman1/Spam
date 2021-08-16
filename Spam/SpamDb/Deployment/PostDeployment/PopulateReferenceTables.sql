@@ -38,23 +38,41 @@ IF dbo.ufn_PermissionId('Get') is null
             )
         VALUES (1, 'Get')
     END
-IF dbo.ufn_PermissionId('Set') is null
+IF dbo.ufn_PermissionId('Post') is null
     BEGIN
         INSERT INTO ref.tbl_Permission
             (
             Id
             ,Name
             )
-        VALUES (2, 'Set')
+        VALUES (2, 'Post')
     END
-IF dbo.ufn_PermissionId('SetMany') is null
+IF dbo.ufn_PermissionId('PostMany') is null
     BEGIN
         INSERT INTO ref.tbl_Permission
             (
             Id
             ,Name
             )
-        VALUES (3, 'SetMany')
+        VALUES (3, 'PostMany')
+    END
+IF dbo.ufn_PermissionId('Put') is null
+    BEGIN
+        INSERT INTO ref.tbl_Permission
+            (
+            Id
+            ,Name
+            )
+        VALUES (4, 'Put')
+    END
+IF dbo.ufn_PermissionId('PutMany') is null
+    BEGIN
+        INSERT INTO ref.tbl_Permission
+            (
+            Id
+            ,Name
+            )
+        VALUES (5, 'PutMany')
     END
 IF dbo.ufn_PermissionId('Delete') is null
     BEGIN
@@ -82,6 +100,70 @@ IF dbo.ufn_PermissionId('Control') is null
             ,Name
             )
         VALUES (8, 'Control')
+    END
+--Populate Catalog Procedure Type
+IF dbo.ufn_CatalogProcedureTypeId('Get') is null
+    BEGIN
+        INSERT INTO ref.tbl_CatalogProcedureType
+            (
+            Id
+            ,Name
+            )
+        VALUES (1, 'Get')
+    END
+IF dbo.ufn_CatalogProcedureTypeId('Post') is null
+    BEGIN
+        INSERT INTO ref.tbl_CatalogProcedureType
+            (
+            Id
+            ,Name
+            )
+        VALUES (2, 'Post')
+    END
+IF dbo.ufn_CatalogProcedureTypeId('PostMany') is null
+    BEGIN
+        INSERT INTO ref.tbl_CatalogProcedureType
+            (
+            Id
+            ,Name
+            )
+        VALUES (3, 'PostMany')
+    END
+IF dbo.ufn_CatalogProcedureTypeId('Put') is null
+    BEGIN
+        INSERT INTO ref.tbl_CatalogProcedureType
+            (
+            Id
+            ,Name
+            )
+        VALUES (4, 'Put')
+    END
+IF dbo.ufn_CatalogProcedureTypeId('PutMany') is null
+    BEGIN
+        INSERT INTO ref.tbl_CatalogProcedureType
+            (
+            Id
+            ,Name
+            )
+        VALUES (5, 'PutMany')
+    END
+IF dbo.ufn_CatalogProcedureTypeId('Delete') is null
+    BEGIN
+        INSERT INTO ref.tbl_CatalogProcedureType
+            (
+            Id
+            ,Name
+            )
+        VALUES (6, 'Delete')
+    END
+IF dbo.ufn_CatalogProcedureTypeId('DeleteMany') is null
+    BEGIN
+        INSERT INTO ref.tbl_CatalogProcedureType
+            (
+            Id
+            ,Name
+            )
+        VALUES (7, 'DeleteMany')
     END
 --Populate User
 exec admin.usp_AddUser 1, 'U71ODH'

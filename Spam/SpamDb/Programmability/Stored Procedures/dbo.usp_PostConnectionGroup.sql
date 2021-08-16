@@ -7,7 +7,7 @@ as
 	BEGIN
 		SET NOCOUNT ON
 		--Validate new ConnectionGroup
-		IF dbo.ufn_ConnectionGroupId(@ConnectionGroupName) is null
+		IF dbo.ufn_ConnectionGroupId(@ConnectionGroupName) is not null
 			BEGIN
 				SET @ErrorMessage = N'ConnectionGroup already exists'
 				RETURN

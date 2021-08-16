@@ -8,7 +8,7 @@ as
 	BEGIN
 		SET NOCOUNT ON
 		--Validate new SecurityGroup
-		IF dbo.ufn_SecurityGroupId(@SecurityGroupName,@SecuirityGroupDomainId) is null
+		IF dbo.ufn_SecurityGroupId(@SecurityGroupName,@SecuirityGroupDomainId) is not null
 			BEGIN
 				SET @ErrorMessage = N'Security group already exists!'
 				RETURN

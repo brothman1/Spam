@@ -31,6 +31,7 @@ as
 						,a.RecordUpdate = default
 				FROM	ref.tbl_Connection as a
 				WHERE	a.Id = @ConnectionId
+						and a.RecordHash <> @RecordHash
 			END TRY
 			BEGIN CATCH
 				SET @ErrorMessage = error_message()

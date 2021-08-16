@@ -95,7 +95,7 @@
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_PermissionId.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_PermissionName.sql" />
     <Build Include="Tables\dbo.tbl_CatalogPermission.sql" />
-    <Build Include="Tables\dbo.tbl_CatalogItem.sql" />
+    <Build Include="Tables\dbo.tbl_Catalog.sql" />
     <Build Include="Tables\admin.tbl_User.sql" />
     <Build Include="Security\Schemas\admin.sql" />
     <Build Include="Programmability\Stored Procedures\admin.usp_AddUser.sql" />
@@ -120,6 +120,15 @@
     <Build Include="Security\Symmetric Keys\ConnectionStringSymmetricKey.sql" />
     <Build Include="Security\MasterKey.sql" />
     <Build Include="Programmability\Stored Procedures\dbo.usp_PutConnection.sql" />
+    <Build Include="Tables\dbo.tbl_CatalogProcedure.sql" />
+    <Build Include="Tables\ref.tbl_CatalogProcedureType.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogProcedureTypeId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogProcedureTypeName.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogName.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogProcedureId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogProcedureCatalogId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogProcedureName.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SpamDb.refactorlog" />
