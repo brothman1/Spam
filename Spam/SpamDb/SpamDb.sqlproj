@@ -129,6 +129,16 @@
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogProcedureId.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogProcedureCatalogId.sql" />
     <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogProcedureName.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PostCatalog.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PostCatalogPermission.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PostCatalogProcedure.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PutCatalog.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PutCatalogPermission.sql" />
+    <Build Include="Programmability\Stored Procedures\dbo.usp_PutCatalogProcedure.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogPermissionId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogPermissionCatalogId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogPermissionSecurityGroupId.sql" />
+    <Build Include="Programmability\Functions\Scalar-valued Functions\dbo.ufn_CatalogPermissionPermissionId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SpamDb.refactorlog" />

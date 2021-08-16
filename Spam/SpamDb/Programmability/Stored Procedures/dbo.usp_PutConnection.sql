@@ -1,11 +1,16 @@
 ﻿CREATE PROCEDURE dbo.usp_PutConnection
-	@ConnectionId uniqueidentifier
+	@ConnectionGroupName nvarchar(32)
+	,@EnvironmentName nvarchar(32)
 	,@ConnectionString nvarchar(256)
 	,@SessionId uniqueidentifier
 	,@ErrorMessage nvarchar(4000) = null OUTPUT
 as
 	BEGIN
 		SET NOCOUNT ON
+		--Translate ConnectionGroup and ConnectionEnvironment
+		DECLARE	@ConnectionGroupId uniqueidentifier = dbo.ufn_ConnectionGroupId(@ConnectionGroupName)
+		DECLARE	@EnvironmentId uniqueidentifier = dbo.ufn_ConnectionEnvironmentId(@EnvironmentName)
+		DECLARE @ConnectionId uniqueidentifier = dbo.ufn_ConnectionId(@ConnectionGroupId,@EnvironmentId)
 		--Validate Connection Exists
 		IF NOT EXISTS (SELECT 1 FROM ref.tbl_Connection as a with (nolock) WHERE a.Id = @ConnectionId)
 			BEGIN
@@ -14,9 +19,6 @@ as
 			END
 		BEGIN TRANSACTION
 			BEGIN TRY
-				--Get ConnectionGroupId and EnvironmentId
-				DECLARE	@ConnectionGroupId uniqueidentifier = dbo.ufn_ConnectionConnectionGroupId(@ConnectionId)
-				DECLARE	@EnvironmentId uniqueidentifier = dbo.ufn_ConnectionEnvironmentId(@ConnectionId)
 				--Encrypt ConnectionString
 				OPEN SYMMETRIC KEY ConnectionStringSymmetricKey DECRYPTION BY CERTIFICATE ConnectionStringCertificate
 					DECLARE	@EncryptedConnectionString varbinary(8000) = encryptbykey(key_guid(N'ConnectionStringSymmetricKey'),@ConnectionString)
